@@ -111,18 +111,20 @@ function draw() {
 
   console.log(frameCount);
   if (done) {
-    // canvas color
-    blendMode(MULTIPLY);
-    noStroke();
-    fill("#e8e7dc88");
-    rect(0, 0, width, height);
+    if (fullRender) {
+      // canvas color
+      blendMode(MULTIPLY);
+      noStroke();
+      fill("#e8e7dc88");
+      rect(0, 0, width, height);
 
-    // noise overlay
-    blendMode(OVERLAY);
-    for (let x = 0; x < width; x++) {
-      for (let y = 0; y < height; y++) {
-        fill(randomGaussian(128, 7));
-        rect(x, y, 1, 1);
+      // noise overlay
+      blendMode(OVERLAY);
+      for (let x = 0; x < width; x++) {
+        for (let y = 0; y < height; y++) {
+          fill(randomGaussian(128, 7));
+          rect(x, y, 1, 1);
+        }
       }
     }
 
@@ -341,10 +343,6 @@ function dry() {
   dryPaintGraphics.image(postGraphics, 0, 0);
   paintGraphics.clear();
   waterGraphics.background(0);
-}
-
-function sigmoid(x) {
-  return 1 / (1 + exp(-x))
 }
 
 function getSequenceT(i, count) {
